@@ -25,10 +25,11 @@ const shippingSchema = new mongoose.Schema({
     zip: String,
     orderId: String,
     cartItems: [{
-        productId: String,
-        quantity: Number // Change quantity field to number
+        id: String,
+        quantity: Number,
     }],
 });
+
 
 // create a model for the shipping data
 const Shipping = mongoose.model('Shipping', shippingSchema);

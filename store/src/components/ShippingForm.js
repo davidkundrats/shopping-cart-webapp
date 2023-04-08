@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { ShopContext } from "../context/shop-context";
-import allProducts from "../data/fulldata.js";
 import "../shipping.css";
 
 export default function ShippingForm() {
@@ -24,21 +23,23 @@ export default function ShippingForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Update cartItems format
+        const cartItemsWithData = Object.keys(cartItems).map((itemId) => {
+            return {
+                id: itemId,
+                quantity: cartItems[itemId],
+            };
+        });
+
         const errors = validateForm(formData);
         if (Object.keys(errors).length === 0) {
             // Include cartItems in form submission
-            const cartItemsWithData = Object.keys(cartItems).map((itemId) => {
-                const itemInfo = allProducts.find((product) => product.id === itemId);
-                return {
-                    id: itemId,
-                    name: itemInfo.name,
-                    quantity: cartItems[itemId],
-                };
-            });
-
-            // Send cartItemsWithData to MongoDB
             try {
-                await axios.post("http://localhost:5000/api/shipping", { ...formData, cartItems: JSON.stringify(cartItemsWithData) });
+                await axios.post("http://localhost:5000/api/shipping", {
+                    ...formData,
+                    cartItems: cartItemsWithData,
+                });
 
                 // Clear form data
                 setFormData({
@@ -55,7 +56,6 @@ export default function ShippingForm() {
             setFormErrors(errors);
         }
     };
-
 
     const validateForm = (data) => {
         const errors = {};
