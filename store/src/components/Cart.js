@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { ShopContext } from "../context/shop-context";
-import CartItem from "../components/CartItem";
+import CartItem from "./CartItem";
 import allProducts from "../data/fulldata";
 import "../cart.css";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,6 @@ export default function Cart({ inCheckout = false }) {
   const { cartItems, getTotalCartAmount } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
   const navigate = useNavigate();
-
-
 
   return (
     <aside className="cart">

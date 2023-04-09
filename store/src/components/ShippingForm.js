@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { ShopContext } from "../context/shop-context";
 import "../shipping.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ShippingForm() {
     const [formData, setFormData] = useState({
@@ -11,8 +12,9 @@ export default function ShippingForm() {
         state: "",
         zip: "",
     });
+    const navigate = useNavigate();
 
-    const { cartItems } = useContext(ShopContext); // Access cartItems from context
+    const { cartItems } = useContext(ShopContext); // Access cartItems and setShippingInfo from context
 
     const [formErrors, setFormErrors] = useState({});
 
@@ -34,20 +36,11 @@ export default function ShippingForm() {
 
         const errors = validateForm(formData);
         if (Object.keys(errors).length === 0) {
-            // Include cartItems in form submission
+            // Include cartItems and shipping info in form submission
             try {
                 await axios.post("http://localhost:5000/api/shipping", {
                     ...formData,
                     cartItems: cartItemsWithData,
-                });
-
-                // Clear form data
-                setFormData({
-                    name: "",
-                    address: "",
-                    town: "",
-                    state: "",
-                    zip: "",
                 });
             } catch (error) {
                 console.error("Error sending data to MongoDB:", error);
@@ -56,7 +49,6 @@ export default function ShippingForm() {
             setFormErrors(errors);
         }
     };
-
     const validateForm = (data) => {
         const errors = {};
         if (!data.name) {
@@ -132,7 +124,7 @@ export default function ShippingForm() {
                 />
                 {formErrors.zip && <span>{formErrors.zip}</span>}
             </div>
-            <button type="submit">Submit and Proceed to Payment</button>
+            <button type="submit" onClick={() => navigate("/payment")}>Submit and Proceed to Payment</button>
         </form>
     );
-}
+};

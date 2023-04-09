@@ -10,7 +10,7 @@ export default function Header() {
         </Link>
       </div>
       <div>
-        <Link to="/cart">Checkout </Link>
+        <Link to="/checkout">Checkout </Link>
       </div>
     </header>
   );

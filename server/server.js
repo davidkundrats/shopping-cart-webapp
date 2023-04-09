@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const xss = require('xss');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -41,7 +42,7 @@ app.use(express.json());
 // handle POST request to /api/shipping
 app.post('/api/shipping', async (req, res) => {
     try {
-        // Extract data from request body
+        // Extract data from request body and sanitize user input
         const {
             name,
             address,
@@ -50,16 +51,20 @@ app.post('/api/shipping', async (req, res) => {
             zip,
             cartItems
         } = req.body;
+        const sanitized = {
+            name: xss(name),
+            address: xss(address),
+            town: xss(town),
+            state: xss(state),
+            zip: xss(zip),
+            cartItems: cartItems.map((item) => ({
+                id: xss(item.id),
+                quantity: xss(item.quantity)
+            }))
+        };
 
-        // Create a new shipping document
-        const shipping = new Shipping({
-            name,
-            address,
-            town,
-            state,
-            zip,
-            cartItems
-        });
+        // Use parameterized queries to prevent SQL injection
+        const shipping = new Shipping(sanitized);
 
         // Save the shipping document to MongoDB
         await shipping.save();

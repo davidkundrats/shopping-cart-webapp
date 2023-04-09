@@ -1,8 +1,6 @@
 import React from 'react';
 import ShippingForm from '../components/ShippingForm';
-import Cart from './Cart';
-import "../shipping.css"
-
+import Cart from '../components/Cart';
 
 function Checkout() {
     return (
