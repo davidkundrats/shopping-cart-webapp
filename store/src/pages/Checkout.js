@@ -1,19 +1,13 @@
 import React from 'react';
-import ShippingForm from '../components/ShippingForm';
 import Cart from '../components/Cart';
+import { useNavigate } from 'react-router-dom';
 
 function Checkout() {
+    const navigate = useNavigate();
     return (
-        <div className="row">
-            <div className="col-1">
-                <div className="block">
-                    <ShippingForm />
-                </div>
-            </div>
-            <div className="col-2">
-                <div className="block cart">
-                    <Cart inCheckout={true} />
-                </div>
+        <div >
+            <div>
+                <Cart />
             </div>
         </div>
     );

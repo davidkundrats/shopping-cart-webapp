@@ -9,7 +9,8 @@ import Header from "./components/Header";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { ShopContextProvider } from "./context/shop-context";
+import { ShopContextProvider, ShopContext } from "./context/shop-context";
+
 
 function App() {
   return (
