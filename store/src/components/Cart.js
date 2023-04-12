@@ -11,6 +11,7 @@ export default function Cart() {
   const totalAmount = getTotalCartAmount();
   const navigate = useNavigate();
 
+
   return (
     <aside className="cart">
       <div>
@@ -23,6 +24,7 @@ export default function Cart() {
           }
         })}
       </div>
+
 
       <div className="checkout">
         <p>Subtotal: ${totalAmount}</p>

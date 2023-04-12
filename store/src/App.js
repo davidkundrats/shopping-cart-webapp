@@ -5,6 +5,7 @@ import {
   Route,
   useActionData,
 } from "react-router-dom";
+import { useState } from "react";
 import Header from "./components/Header";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
@@ -13,6 +14,7 @@ import { ShopContextProvider, ShopContext } from "./context/shop-context";
 
 
 function App() {
+  const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   return (
     <div>
       <ShopContextProvider>
@@ -22,10 +24,10 @@ function App() {
               "AegV-HsTK6AStW72By7YtDrGSad88eC8P_JxYr-NO-nu3bAcByfyi1xDFPvwiOkqYxRV03zkeLUPzWmr",
           }}>
           <Router>
-            <Header />
+            <Header paymentSucceeded={paymentSucceeded} />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/payment" element={<Payment />} />
+              <Route path="/payment" element={<Payment setPaymentSucceeded={setPaymentSucceeded} />} />
               <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </Router>

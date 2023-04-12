@@ -17,7 +17,6 @@ export const ShopContextProvider = (props) => {
   const [shippingInfo, setShippingInfo] = useState({});
 
   const addToCart = (id) => {
-    console.log("Added item with id:", id);
     setCart((prev) => ({ ...prev, [id]: prev[id] + 1 }));
     setCartItemIds((prev) => [...prev, id]);
   };
@@ -38,6 +37,12 @@ export const ShopContextProvider = (props) => {
     setCartItemIds((prev) => prev.filter((itemId) => itemId !== id));
   };
 
+  const resetCart = () => {
+    setCart(getDefaultCart());
+    setCartItemIds([]);
+    setShippingInfo({});
+  };
+
   return (
     <ShopContext.Provider
       value={{
@@ -46,12 +51,12 @@ export const ShopContextProvider = (props) => {
         getTotalCartAmount,
         removeFromCart,
         cartItemIds,
-        setShippingInfo, // Add the new state variable to the context
-        shippingInfo, // Add the shipping info to the context
+        setShippingInfo,
+        shippingInfo,
+        resetCart, // Add the resetCart function to the context
       }}
     >
       {props.children}
     </ShopContext.Provider>
   );
 };
-

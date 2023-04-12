@@ -11,10 +11,11 @@ export default function Payment(props) {
     const { cartItems, getTotalCartAmount, } = useContext(ShopContext);
     const totalAmount = getTotalCartAmount();
     const navigate = useNavigate();
-    const [succeeded, setSucceeded] = useState(false);
     const [paypalErrorMessage, setPaypalErrorMessage] = useState("");
     const [orderID, setOrderID] = useState(false);
     const [billingDetails, setBillingDetails] = useState("");
+    const { setPaymentSucceeded } = props;
+    const [succeeded, setSucceeded] = useState(false);
 
     // creates a paypal order
 
@@ -42,6 +43,7 @@ export default function Payment(props) {
             const { payer } = details;
             setBillingDetails(payer);
             setSucceeded(true);
+            setPaymentSucceeded(true);
 
             const orderID = data.orderID;
 
@@ -65,8 +67,6 @@ export default function Payment(props) {
                 }
             });
 
-            console.log(items);
-
             const orderData = {
                 orderId: orderID,
                 items: items,
@@ -75,13 +75,14 @@ export default function Payment(props) {
             axios
                 .post("http://localhost:4500/api/shipping", orderData)
                 .then((response) => {
-                    console.log(response);
+                    console.log('status:201');
                 })
                 .catch((error) => {
                     console.log(error);
                     setPaypalErrorMessage("Something went wrong with your payment");
                 });
         });
+
     };
 
     // handles payment errors
@@ -116,7 +117,7 @@ export default function Payment(props) {
             .then(response => response.json())
             .then(data => {
                 // Handle success
-                console.log(data.message); // assuming the server returns a 'message' field
+                console.log('status:201'); // assuming the server returns a 'message' field
             })
             .catch(error => {
                 // Handle error
@@ -151,10 +152,16 @@ export default function Payment(props) {
                 <form onSubmit={handleSubmit}>
                     <label>
                         Email:
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter your email for confirmation number" // Placeholder text
+                        />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
+
             </div>
         );
     }
