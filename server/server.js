@@ -1,15 +1,17 @@
 require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const xss = require('xss');
 const nodemailer = require('nodemailer');
 
+
+
 const mailUserName = process.env.MAIL_USERNAME;
 const mailPassword = process.env.MAIL_PASSWORD;
 const serviceProvider = process.env.SERVICE_PROVIDER;
 const mongoUser = process.env.MONGO_USERNAME;
+
 
 
 const transporter = nodemailer.createTransport({
