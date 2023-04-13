@@ -20,6 +20,9 @@ node_modules
 .env.production.local
 .env
 store.pem
+Config.js
+config
+storekey.pem
 
 
 npm-debug.log*

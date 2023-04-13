@@ -4,12 +4,16 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const xss = require('xss');
 const nodemailer = require('nodemailer');
-
+const config = require('./config/dev.js');
 const path = require('path');
+
+const app = express(); // Create Express app instance
+app.use(cors());
+
 
 const _dirname = path.dirname("")
 const buildPath = path.join(_dirname, "../store/build")
-const app = express(); // Create Express app instance
+
 
 app.use(express.json());
 app.use(express.static(buildPath))
@@ -27,7 +31,7 @@ app.get("/*", (req, res) => {
 const mailUserName = process.env.MAIL_USERNAME;
 const mailPassword = process.env.MAIL_PASSWORD;
 const serviceProvider = process.env.SERVICE_PROVIDER;
-const mongoUser = process.env.MONGO_USERNAME;
+
 
 
 
@@ -44,11 +48,19 @@ const PORT = process.env.PORT || 4500;
 // enable cors
 app.use(cors());
 
-// connect to MongoDB with username and password
-mongoose.connect('mongodb://localhost:27017/orders', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+console.log(config.mongoURI)
+
+
+// connect to MongoDB 
+mongoose.connect(config.mongoURI,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.error(err));
+
+
 
 // create a schema for the shipping data
 const shippingSchema = new mongoose.Schema({

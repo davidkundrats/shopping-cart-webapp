@@ -6,8 +6,12 @@ import "../orderconfirmation.css"
 import { useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
+import config from "../Config.js";
+
+
 
 export default function Payment(props) {
+
     const { cartItems, getTotalCartAmount, } = useContext(ShopContext);
     const totalAmount = getTotalCartAmount();
     const navigate = useNavigate();
@@ -16,6 +20,9 @@ export default function Payment(props) {
     const [billingDetails, setBillingDetails] = useState("");
     const { setPaymentSucceeded } = props;
     const [succeeded, setSucceeded] = useState(false);
+    const mailAPI = config.API_URL_EMAIL;
+    const dbAPI = config.API_URL_DB;
+
 
     // creates a paypal order
 
@@ -73,7 +80,7 @@ export default function Payment(props) {
             };
 
             axios
-                .post("http://localhost:4500/api/shipping", orderData)
+                .post(dbAPI, orderData)
                 .then((response) => {
                     console.log('status:201');
                 })
@@ -107,7 +114,7 @@ export default function Payment(props) {
         };
 
         // Make a POST request to the server
-        fetch("http://localhost:4500/api/order", {
+        fetch(mailAPI, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
