@@ -5,6 +5,23 @@ const cors = require('cors');
 const xss = require('xss');
 const nodemailer = require('nodemailer');
 
+const path = require('path');
+
+const _dirname = path.dirname("")
+const buildPath = path.join(_dirname, "../store/build")
+const app = express(); // Create Express app instance
+
+app.use(express.json());
+app.use(express.static(buildPath))
+
+
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(_dirname, "../store/build/index.html"), err => {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
+})
 
 
 const mailUserName = process.env.MAIL_USERNAME;
@@ -22,7 +39,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const app = express();
 const PORT = process.env.PORT || 4500;
 
 // enable cors

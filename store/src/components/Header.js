@@ -17,7 +17,6 @@ export default function Header(props) {
     }
   };
 
-
   return (
     <header className="row block center">
       <div>

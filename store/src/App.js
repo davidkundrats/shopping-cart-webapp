@@ -10,18 +10,19 @@ import Header from "./components/Header";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { ShopContextProvider, ShopContext } from "./context/shop-context";
+import { ShopContextProvider } from "./context/shop-context";
+
 
 
 function App() {
+
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   return (
     <div>
       <ShopContextProvider>
         <PayPalScriptProvider
           options={{
-            "client-id":
-              "AegV-HsTK6AStW72By7YtDrGSad88eC8P_JxYr-NO-nu3bAcByfyi1xDFPvwiOkqYxRV03zkeLUPzWmr",
+            "client-id": "AegV-HsTK6AStW72By7YtDrGSad88eC8P_JxYr-NO-nu3bAcByfyi1xDFPvwiOkqYxRV03zkeLUPzWmr"
           }}>
           <Router>
             <Header paymentSucceeded={paymentSucceeded} />
