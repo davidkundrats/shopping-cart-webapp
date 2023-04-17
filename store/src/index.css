@@ -40,3 +40,23 @@ a{
 img.small{ 
   max-height: 16rem; 
 }
+.links-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.link {
+  margin-left: 10px;
+  color: #000;
+  font-family: Arial, sans-serif;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #666;
+}
