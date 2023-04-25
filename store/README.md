@@ -1,70 +1,43 @@
-# About
+# README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This client-side code consists of 3 pages: '/', '/checkout', and '/payment'. The code is written in React and uses several features including useState, useContext, and a context provider page to manage state across the app.
+## **Pages**
+### Home Page (Route: '/')
 
-## Available Scripts
+The home page displays a list of products available for purchase. Users can add or remove items from their cart, and see the total cost of their items. The items displayed on this page are rendered dynamically using a component that accepts an array of product data.
+### Checkout Page (Route: '/checkout')
 
-In the project directory, you can run:
+The checkout page displays a summary of the user's shopping cart. Users can adjust the quantity of each item, remove items, and see the updated total cost of their items. The items displayed on this page are also rendered dynamically using a component that accepts the user's shopping cart data.
+### Payment Page (Route: '/payment')
 
-### `npm start`
+The payment page allows users to enter their payment information to complete their purchase. This page also displays a summary of the user's shopping cart and the total cost of their items. Users can enter their payment details securely as the payment portal is managed by PayPal, allowing users to have a familiar, easy checkout experienece. 
+### State Management
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The app uses useState to manage state across the app. The state is passed down to child components as props.
+### Context Provider Page
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+A context provider page is used to manage state across the app. The context provider page contains the state and functions to update the state. This page wraps the entire app in a ShopContextProvider component.
+### useContext
 
-### `npm test`
+The useContext hook is used to access the state and functions in the context provider page. This allows child components to update the state and trigger re-renders as needed.
+Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app contains 10+ components that are used to render dynamic values and allow adjustment of the shopping cart. These components are reusable and can be used throughout the app.
+## How to Run the Code
 
-### `npm run build`
+To run the client-side code, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Clone the repository to your local machine.
+    Navigate to the root directory of the project.
+    Run npm install to install the required dependencies.
+    Run npm start to start the development server.
+    Open your web browser and navigate to http://localhost:3000 to view the app.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app uses several dependencies including:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    React: A JavaScript library for building user interfaces.
+    React Router: A library for routing in React apps.
+    Axios: A promise-based HTTP client for the browser and Node.js.
+    PayPal-react-js: A payment processing platform for online businesses.
