@@ -1,5 +1,6 @@
 # shopping-cart-webapp
-a MERN stack website that allows users to purchase darkroom prints from myself. 
+
+a MERN stack website that allows users to purchase darkroom prints from myself. The react front end is hosted on an EC2 instance with an NGINX reverse proxy to handle api calls to an express back end. This project gives great experience for using React, Express, and using cloud services to host and manage everything. 
 Here is the hosted link to where you can check out the code in action: [link](https://www.daves-prints.net)
 
 # README
