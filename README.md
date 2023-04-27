@@ -50,6 +50,7 @@ npm start
 ```bash 
 npm run build
 ```
+## Please note you will have to use your own config/.env files to configure the logins and other sensitive data within the app. 
 
 ## Dependencies
 
