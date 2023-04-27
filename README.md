@@ -112,4 +112,42 @@ The server will start listening for incoming requests on the port specified in e
 ![nginx screesnhot](https://user-images.githubusercontent.com/98171693/234328530-771ac617-c0d2-4381-b75a-922f6814ccd8.jpg)
  * Please note that you will need to download and install Certbot to gain your own certifications on the server side.
  
- # AWS Services
+ # AWS Service Setup Guide
+## ACM 
+
+### ACM is a service that lets you provision and manage SSL/TLS certificates for use with AWS services.
+
+To use ACM with Route 53 and ELB, you will need to:
+
+    *Request a certificate in ACM for your domain name(s). This can be done in the AWS Management Console or via the AWS CLI.
+    *Once you have requested the certificate, you will need to validate ownership of your domain(s). This can be done via email validation or DNS validation.
+    *Once the certificate is issued and validated, you can then associate it with your ELB in the AWS Management Console or via the AWS CLI.
+
+### IAM (Identity and Access Management)
+
+IAM is a service that lets you manage access to AWS resources.
+
+To set up IAM for your EC2 instance, you will need to:
+
+    Create an IAM role with the necessary permissions for your EC2 instance to access other AWS services (such as S3 or DynamoDB). This can be done in the AWS Management Console or via the AWS CLI.
+    When launching your EC2 instance, specify the IAM role you created in step 1. This can be done in the AWS Management Console or via the AWS CLI.
+
+### Route 53
+
+Route 53 is a DNS service that lets you route traffic to AWS resources.
+
+To use Route 53 with your domain, you will need to:
+
+    Create a hosted zone in Route 53 for your domain name. This can be done in the AWS Management Console or via the AWS CLI.
+    Create DNS records in your hosted zone to route traffic to your ELB. This can be done in the AWS Management Console or via the AWS CLI.
+
+### EC2 Instance with ELB
+
+EC2 is a service that lets you launch and manage virtual machines in the cloud, and ELB (Elastic Load Balancing) is a service that lets you distribute traffic to multiple EC2 instances.
+
+To set up an EC2 instance with an ELB, you will need to:
+
+    Launch your EC2 instance, making sure to choose the appropriate instance type and security group settings. This can be done in the AWS Management Console or via the AWS CLI.
+    Create an ELB and configure it to distribute traffic to your EC2 instance. This can be done in the AWS Management Console or via the AWS CLI.
+    Associate your SSL/TLS certificate from ACM with the ELB. This can be done in the AWS Management Console or via the AWS CLI.
+    Configure Route 53 to route traffic to your ELB, as described in the previous section.
