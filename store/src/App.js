@@ -22,7 +22,7 @@ function App() {
       <ShopContextProvider>
         <PayPalScriptProvider
           options={{
-            "client-id": "AegV-HsTK6AStW72By7YtDrGSad88eC8P_JxYr-NO-nu3bAcByfyi1xDFPvwiOkqYxRV03zkeLUPzWmr"
+            "client-id": ""
           }}>
           <Router>
             <Header paymentSucceeded={paymentSucceeded} />
